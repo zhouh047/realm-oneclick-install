@@ -133,7 +133,7 @@ help(){
     echo ""
     echo "  -h , --help                显示帮助信息"
     echo "  -i , --install             安装realm"
-    echo "  -u , --uninstall          卸载realm"
+    echo "  -u , --uninstall           卸载realm"
     echo ""
 }
 
