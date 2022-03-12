@@ -129,7 +129,7 @@ hello(){
 
 help(){
     hello
-    echo "使用方法：bash $0 [-h] [-i] [u]"
+    echo "使用方法：bash $0 [-h] [-i] [-u]"
     echo ""
     echo "  -h , --help                显示帮助信息"
     echo "  -i , --install             安装realm"
