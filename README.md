@@ -6,7 +6,7 @@ realm自助安装脚本
 realm is a simple, high performance relay server written in rust.
 项目地址：https://github.com/zhboner/realm
 
-使用方法：bash realm.sh [-h] [-i] [u]
+使用方法：bash realm.sh [-h] [-i] [-u]
 
   -h , --help                显示帮助信息
   -i , --install             安装realm
