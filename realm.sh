@@ -164,7 +164,7 @@ install_realm(){
 
 uninstall_realm(){
     systemctl stop realm
-    systemctl disable realm
+    systemctl disable realm > /dev/null 2>&1
 
 	rm -f /usr/bin/realm
 	rm -f /etc/systemd/system/realm.service
