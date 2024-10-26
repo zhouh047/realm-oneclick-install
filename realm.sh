@@ -147,6 +147,7 @@ install_realm(){
   	[ ! -f /tmp/realm] && echo -e "[${red}Error${plain}] realm可执行文件不存在" && exit 1
         mv /tmp/realm /usr/bin/ && chown root:root /usr/bin/realm && chmod +x /usr/bin/realm
 	download  /etc/systemd/system/realm.service https://raw.githubusercontent.com/zhouh047/realm-oneclick-install/main/realm.service
+ 	systemctl daemon-reload
 	[ ! -d /usr/local/etc/realm/ ] && mkdir /usr/local/etc/realm/
 	download  /usr/local/etc/realm/config.toml https://raw.githubusercontent.com/zhouh047/realm-oneclick-install/main/config.toml
 	
