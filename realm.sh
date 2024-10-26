@@ -106,17 +106,11 @@ error_detect_depends(){
 }
 
 install_dependencies(){
-    if centosversion 8; then
-	    echo "检测到系统为CentOS 8，正在更新源。使用vault.centos.org代替mirror.centos.org..."
-        sed -i -e "s|mirrorlist=|#mirrorlist=|g" /etc/yum.repos.d/CentOS-*
-	    sed -i -e "s|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g" /etc/yum.repos.d/CentOS-*
-    fi
-	
-	if check_sys packageManager yum; then
-		error_detect_depends "yum -y install wget"  
-	elif check_sys packageManager apt; then
-		error_detect_depends "apt-get -y install wget"
-	fi	
+    if check_sys packageManager yum; then
+        error_detect_depends "yum -y install wget"  
+    elif check_sys packageManager apt; then
+	error_detect_depends "apt-get -y install wget"
+    fi	
 }
 
 hello(){
@@ -147,21 +141,23 @@ confirm(){
 }
 
 install_realm(){
-	echo "安装realm 1.4版本..."
-	
-	download  /usr/bin/realm  https://github.com/zhboner/realm/releases/download/v1.4/realm && chmod +x /usr/bin/realm
+	echo "安装realm 2.6.3版本..."
+ 	download  /tmp/realm-x86_64-unknown-linux-gnu.tar.gz https://github.com/zhboner/realm/releases/download/v2.6.3/realm-x86_64-unknown-linux-gnu.tar.gz
+ 	tar -zxvf -C /usr/bin /tmp/realm-x86_64-unknown-linux-gnu.tar.gz
+        chmod +x /usr/bin/realm
+	rm -f /tmp/realm-x86_64-unknown-linux-gnu.tar.gz
 	download  /etc/systemd/system/realm.service https://raw.githubusercontent.com/zhouh047/realm-oneclick-install/main/realm.service
 	[ ! -d /usr/local/etc/realm/ ] && mkdir /usr/local/etc/realm/
-	download  /usr/local/etc/realm/config.json https://raw.githubusercontent.com/zhouh047/realm-oneclick-install/main/config.json
+	download  /usr/local/etc/realm/config.toml https://raw.githubusercontent.com/zhouh047/realm-oneclick-install/main/config.toml
 	
-	echo "realm 1.4安装成功..."
+	echo "realm 2.6.3安装成功..."
 	[ -f /usr/bin/realm ] && echo -e "${green}installed${plain}: /usr/bin/realm"
 	[ -f /etc/systemd/system/realm.service ] && echo -e "${green}installed${plain}: /etc/systemd/system/realm.service"
-	[ -f /usr/local/etc/realm/config.json ] && echo  -e "${green}installed${plain}: /usr/local/etc/realm/config.json"
+	[ -f /usr/local/etc/realm/config.toml ] && echo  -e "${green}installed${plain}: /usr/local/etc/realm/config.toml"
 	
 	echo -e "${yellow}注意：本脚本没有自动配置转发，也没有启动realm。${plain}"
-	echo -e "${yellow}请编辑/usr/local/etc/realm/config.json，添加转发配置。${plain}"
-	echo -e "${yellow}运行命令 systemctl enable --now realm && systemctl start realm 启动realm${plain}"
+	echo -e "${yellow}请编辑/usr/local/etc/realm/config.toml，添加转发配置。${plain}"
+	echo -e "${yellow}运行命令 systemctl enable realm && systemctl start realm 启动realm${plain}"
 }
 
 uninstall_realm(){
@@ -172,7 +168,7 @@ uninstall_realm(){
 	rm -f /etc/systemd/system/realm.service
 	rm -rf /usr/local/etc/realm/
 	
-	if [ ! -f /usr/bin/realm ] && [ ! -f /etc/systemd/system/realm.service ] && [ ! -f /usr/local/etc/realm/config.json ];then 
+	if [ ! -f /usr/bin/realm ] && [ ! -f /etc/systemd/system/realm.service ] && [ ! -f /usr/local/etc/realm/config.toml ];then 
 		echo -e "${green}卸载成功${plain}"
 	else 
 	    echo -e "${red}卸载失败${plain}"
