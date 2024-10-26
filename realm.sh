@@ -142,9 +142,10 @@ confirm(){
 
 install_realm(){
 	echo "安装realm 2.6.3版本..."
- 	wget -P /tmp/ https://github.com/zhboner/realm/releases/download/v2.6.3/realm-x86_64-unknown-linux-gnu.tar.gz
+ 	download /tmp/realm-x86_64-unknown-linux-gnu.tar.gz https://github.com/zhboner/realm/releases/download/v2.6.3/realm-x86_64-unknown-linux-gnu.tar.gz
  	tar -zxvf /tmp/realm-x86_64-unknown-linux-gnu.tar.gz
-        mv /tmp/realm /usr/bin/ && chmod +x /usr/bin/realm
+  	[ ! -f /tmp/realm] && echo -e "[${red}Error${plain}] realm可执行文件不存在" && exit 1
+        mv /tmp/realm /usr/bin/ && &&chown root:root /usr/bin/realm && chmod +x /usr/bin/realm
 	download  /etc/systemd/system/realm.service https://raw.githubusercontent.com/zhouh047/realm-oneclick-install/main/realm.service
 	[ ! -d /usr/local/etc/realm/ ] && mkdir /usr/local/etc/realm/
 	download  /usr/local/etc/realm/config.toml https://raw.githubusercontent.com/zhouh047/realm-oneclick-install/main/config.toml
