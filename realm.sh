@@ -181,12 +181,13 @@ if [[ $# = 1 ]];then
     key="$1"
     case $key in
         -i|--install)
-		disable_selinux
-		install_dependencies
+	hello
+	disable_selinux
+	install_dependencies
         install_realm
         ;;
         -u|--uninstall)
-		hello
+	hello
         echo -e "${yellow}正在执行卸载realm.${plain}"
         confirm
         uninstall_realm
