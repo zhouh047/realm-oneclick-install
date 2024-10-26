@@ -9,7 +9,7 @@ User=root
 Restart=on-failure
 RestartSec=5s
 DynamicUser=true
-ExecStart=/usr/bin/realm -c /usr/local/etc/realm/config.json
+ExecStart=/usr/bin/realm -c /usr/local/etc/realm/config.toml
 
 [Install]
 WantedBy=multi-user.target
