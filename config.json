@@ -1,6 +1,0 @@
-{
-    "listening_addresses": ["0.0.0.0"],
-    "listening_ports": ["xxx"],
-    "remote_addresses": ["xxx"],
-    "remote_ports": ["xxx"]
-}
