@@ -98,7 +98,7 @@ error_detect_depends(){
     local command=$1
     local depend=`echo "${command}" | awk '{print $4}'`
     echo -e "[${green}Info${plain}] Starting to install package ${depend}"
-    ${command} 
+    ${command} > /dev/null 2>&1
     if [ $? -ne 0 ]; then
         echo -e "[${red}Error${plain}] Failed to install ${red}${depend}${plain}"
         exit 1
@@ -143,7 +143,7 @@ confirm(){
 install_realm(){
 	echo "安装realm 2.6.3版本..."
  	download /tmp/realm-x86_64-unknown-linux-gnu.tar.gz https://github.com/zhboner/realm/releases/download/v2.6.3/realm-x86_64-unknown-linux-gnu.tar.gz
- 	tar -zxvf /tmp/realm-x86_64-unknown-linux-gnu.tar.gz -C /usr/bin/
+ 	tar -zxvf /tmp/realm-x86_64-unknown-linux-gnu.tar.gz -C /usr/bin/ > /dev/null 2>&1
   	[ ! -f /usr/bin/realm ] && echo -e "[${red}Error${plain}] realm可执行文件不存在" && exit 1
         chown root:root /usr/bin/realm && chmod +x /usr/bin/realm
 	rm -f /tmp/realm-x86_64-unknown-linux-gnu.tar.gz
