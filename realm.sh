@@ -145,7 +145,7 @@ install_realm(){
  	download /tmp/realm-x86_64-unknown-linux-gnu.tar.gz https://github.com/zhboner/realm/releases/download/v2.6.3/realm-x86_64-unknown-linux-gnu.tar.gz
  	tar -zxvf /tmp/realm-x86_64-unknown-linux-gnu.tar.gz
   	[ ! -f /tmp/realm] && echo -e "[${red}Error${plain}] realm可执行文件不存在" && exit 1
-        mv /tmp/realm /usr/bin/ && chown root:root /usr/bin/realm && chmod +x /usr/bin/realm
+        cp /tmp/realm /usr/bin/ && chown root:root /usr/bin/realm && chmod +x /usr/bin/realm
 	download  /etc/systemd/system/realm.service https://raw.githubusercontent.com/zhouh047/realm-oneclick-install/main/realm.service
  	systemctl daemon-reload
 	[ ! -d /usr/local/etc/realm/ ] && mkdir /usr/local/etc/realm/
